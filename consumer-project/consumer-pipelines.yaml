@@ -1,0 +1,63 @@
+name: $(BuildID)
+    
+trigger:
+  batch: true
+  branches:
+    include:
+    - 'master'
+
+pool:
+  vmImage: "windows-latest"
+
+resources:
+  repositories:
+    - repository: ProvisioningEngine
+      name: CCAPractice/ProvisioningEngine
+      type: github
+      endpoint: githubconnection
+      ref: features/ashutosh-provisioningEngine
+
+    
+    #- repository: ConsumerTemplateRepo
+     # name: Cutsomer/CustomerTemplates
+      #type: git
+      # testing tag
+      #ref: master
+
+    - repository: ProvisioningEngineTemplates
+      name: CCAPractice/ProvisioningEngineTemplates
+      type: github
+      endpoint: githubconnection
+      ref: master
+
+extends:
+  template: /pipelines/templates/common-infra-initiator.yaml@ProvisioningEngine
+  parameters:
+    provisioningEnvironment:
+      - DEV
+      - TST
+    variableFiles:
+      - /vars/common.yaml@self
+      - /vars/{environment}.yaml@Self
+    runScript: false #true to enable Powershell,AzurePowershell and CLI Script(s)
+    templatetype: arm #supported template arm,bicep,terraform
+
+    scriptsList: 
+    - displayName: 'Running Powershell Script - Test1.ps1'
+      type: powerShell
+      scriptName: 'test.ps1'
+      scriptArguments: ''      
+
+    #preDeployScriptsList: #run Script as pre execution of template
+    #- displayName: 'TestPowershell1'
+    #  Type: PowerShell
+    #  scriptPath: 'scripts/powershell/test.ps1'
+    #  scriptArguments: ''
+    #  workingDirectory: '$(Pipeline.Workspace)/scripts/powershell/test.ps1'
+
+    # postDeployScriptsList: 
+    # - displayName: 'TestPowershell1'
+    #   Type: PowerShell
+    #   scriptPath: 'scripts/powershell/test.ps1'
+    #   scriptArguments: ''
+    #   workingDirectory: '$(Pipeline.Workspace)/scripts/powershell/test.ps1'
