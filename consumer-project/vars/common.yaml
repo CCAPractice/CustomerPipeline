@@ -1,9 +1,4 @@
 variables:  
-# TAGS
-  serviceCodeTag: PEGT
-  serviceNameTag: PEGT
-  serviceTypeTag: LOB
-
 # FUNCTION NAMING CONVENTIONS
   nc-function-web: WEB
   nc-function-web-lower: "$[lower(variables['nc-function-web'])]"
