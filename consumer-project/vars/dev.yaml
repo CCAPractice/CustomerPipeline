@@ -1,4 +1,8 @@
 variables:
+# TAGS
+  serviceCodeTag: PEGT
+  serviceNameTag: PEGT
+  serviceTypeTag: LOB
   projectName: GPE 
   EnvironmentName: "$(deploymentEnvironment)"
   azureResourceManagerConnection: 'genericTool'
