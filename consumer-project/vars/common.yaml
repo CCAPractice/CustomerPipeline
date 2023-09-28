@@ -1,4 +1,5 @@
 variables:  
+
 # FUNCTION NAMING CONVENTIONS
   nc-function-web: WEB
   nc-function-web-lower: "$[lower(variables['nc-function-web'])]"
@@ -6,10 +7,11 @@ variables:
   nc-function-infrastructure-lower: "$[lower(variables['nc-function-infrastructure'])]"
   nc-function-network: NET
   nc-function-database: DBS
-  nc-function-soc: SOC
+  nc-function-sto: STO
   nc-function-development: DEV
   nc-function-development-lower: "$[lower(variables['nc-function-development'])]"
   nc-function-additional: ADJ
+  
 
 # RESOURCE NAMING CONVENTIONS
   nc-resource-webapp: AW
@@ -39,6 +41,8 @@ variables:
   nc-resource-privatelinkservice: PL
   nc-resource-containerregistry: CR
   nc-resource-logicapps: LA
+  nc-resource-azuremap: MA
+  nc-resource-rediscache: RC
   nc-resource-synapse: AS
   nc-resource-synapse-lower: $[lower(variables['nc-resource-synapse'])]
   nc-resource-azuresearch: SE
@@ -53,6 +57,7 @@ variables:
   nc-resource-eventtopic: ET
   nc-resource-managedidentity: MID
   nc-resource-signalr: SR
+  nc-resource-serviceplan: SP
 
 # Authentication / Common AAD URLs
   authenticationUrl: https://login.microsoftonline.com/
