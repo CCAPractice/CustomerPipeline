@@ -25,8 +25,8 @@ extends:
     - DEV
     - TST
     variableFiles:
-    - /vars/common.yaml@self
-    - /vars/{environment}.yaml@Self
+    - /azure-pipelines/vars/common.yaml@self
+    - /azure-pipelines/vars/{environment}.yaml@Self
     runScript: false
     templatetype: bicep
     # scriptsList:
