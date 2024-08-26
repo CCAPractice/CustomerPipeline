@@ -1,174 +1,179 @@
 variables:
-  projectName: 
+  projectName:
   projectName-lower: $[lower(variables['projectName'])]
   deploymentEnvironment-lower: $[lower(variables['deploymentEnvironment'])]
-  
+
   # TAGS
-  serviceCodeTag: 
-  serviceNameTag: 
-  serviceTypeTag: 
+  serviceCodeTag:
+  serviceNameTag:
+  serviceTypeTag:
 
-  azureResourceManagerConnection: 
-  subscriptionName: 
-  subscriptionId: 
-  appInsightsubscriptionId: 
-  servicesLocation: 
-  deploy: 
-  servicesToDeploy:  
-  postFixResourceGroupNumber: 
-  postFixEventTopicNumber: 
-  postFixAppInsightsNumber: 
-  postFixAppServicePlan: 
-  postFixContainerRegistryName: 
-  postFixServiceBusNameSpace: 
-  postFixStorageAccountNumber: 
-  postFixAzureMap: 
-  postFixAPIManagement: 
-  postFixRedisCache: 
-  postFixSignalr: 
-  postFixDevTestLab: 
-  postFixKeyVault: 
-  postFixFunctionAppServicePlan: 
-  postFixFunctionApp: 
-  postFixAppServiceHostingPlan: 
-  postFixAppService: 
-  networkResourceGroupName: '$(deploymentEnvironment)$(projectName)$(nc-function-network)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)'
-  dataBaseResourceGroupName: '$(deploymentEnvironment)$(projectName)$(nc-function-database)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)'
-  storageResourceGroupName: '$(deploymentEnvironment)$(projectName)$(nc-function-sto)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)'
-  otherInfraResourceGroupName: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)'
-  otherResourceGroupName: '$(deploymentEnvironment)$(projectName)$(nc-function-additional)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)'
-  dashboardName: 
-  budgetName: 
-  budgetAmount: 
-  serviceCode: '$(serviceCodeTag)$(serviceNameTag)$(serviceTypeTag)'
-  
-#Resource Deployment Parameters
+  serviceProvider:
+  terraformVersion: 1.1.0
+  terraformStorageAccountName:
+  terraformStorageContainerName:
+  terraformTfStateFileName:
+  azureResourceManagerConnection:
+  subscriptionName:
+  subscriptionId:
+  appInsightsubscriptionId:
+  servicesLocation:
+  deploy:
+  servicesToDeploy:
+  postFixResourceGroupNumber:
+  postFixEventTopicNumber:
+  postFixAppInsightsNumber:
+  postFixAppServicePlan:
+  postFixContainerRegistryName:
+  postFixServiceBusNameSpace:
+  postFixStorageAccountNumber:
+  postFixAzureMap:
+  postFixAPIManagement:
+  postFixRedisCache:
+  postFixSignalr:
+  postFixDevTestLab:
+  postFixKeyVault:
+  postFixFunctionAppServicePlan:
+  postFixFunctionApp:
+  postFixAppServiceHostingPlan:
+  postFixAppService:
+  networkResourceGroupName: "$(deploymentEnvironment)$(projectName)$(nc-function-network)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)"
+  dataBaseResourceGroupName: "$(deploymentEnvironment)$(projectName)$(nc-function-database)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)"
+  storageResourceGroupName: "$(deploymentEnvironment)$(projectName)$(nc-function-sto)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)"
+  otherInfraResourceGroupName: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)"
+  otherResourceGroupName: "$(deploymentEnvironment)$(projectName)$(nc-function-additional)$(nc-resource-resourcegroup)$(postFixResourceGroupNumber)"
+  dashboardName:
+  budgetName:
+  budgetAmount:
+  serviceCode: "$(serviceCodeTag)$(serviceNameTag)$(serviceTypeTag)"
 
-#EventTopic
-  eventTopicName: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-eventtopic)$(postFixEventTopicNumber)'
+  #Resource Deployment Parameters
 
-#AppInsight
-  appInsightsName: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-appinsights)$(postFixAppInsightsNumber)'
-  appInsightsWorkspaceName: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-operationalinsights-workspace)$(postFixAppInsightsNumber)'
+  #EventTopic
+  eventTopicName: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-eventtopic)$(postFixEventTopicNumber)"
 
-#AppServicePlan
-  appService.SkuName: 
-  appServiceZone.Redundant: 
-  appServicePlan.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-serviceplan)$(postFixAppServicePlan)'
+  #AppInsight
+  appInsightsName: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-appinsights)$(postFixAppInsightsNumber)"
+  appInsightsWorkspaceName: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-operationalinsights-workspace)$(postFixAppInsightsNumber)"
 
-# Container Registry 
-  containerRegistryName: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-appconfiguration)$(postFixContainerRegistryName)'
+  #AppServicePlan
+  appService.SkuName:
+  appServiceZone.Redundant:
+  appServicePlan.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-serviceplan)$(postFixAppServicePlan)"
 
-# ServiceBus
-  serviceBus.NameSpace: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-servicebus)$(postFixServiceBusNameSpace)'
-  serviceBus.Sku: 
+  # Container Registry
+  containerRegistryName: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-appconfiguration)$(postFixContainerRegistryName)"
+
+  # ServiceBus
+  serviceBus.NameSpace: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-servicebus)$(postFixServiceBusNameSpace)"
+  serviceBus.Sku:
   serviceBus.QueueName: $(projectName-lower).$(deploymentEnvironment-lower).outbound
 
-# Storage Account
-  storageAccount.name: '$(deploymentEnvironment-lower)$(projectName-lower)$(nc-function-infrastructure-lower)$(nc-resource-storageaccount-lower)$(postFixStorageAccountNumber)'
-  storageAccount.accountType: 
-  storageAccount.kind: 
-  storageAccount.accessTier: 
-  storageAccount.minimumTlsVersion: 
-  storageAccount.supportsHttpsTrafficOnly: 
-  storageAccount.allowBlobPublicAccess: 
-  storageAccount.allowSharedKeyAccess: 
-  storageAccount.networkAclsBypass: 
-  storageAccount.networkAclsDefaultAction: 
-  storageAccount.isContainerRestoreEnabled: 
-  storageAccount.isBlobSoftDeleteEnabled: 
-  storageAccount.blobSoftDeleteRetentionDays: 
-  storageAccount.isContainerSoftDeleteEnabled: 
-  storageAccount.containerSoftDeleteRetentionDays: 
-  storageAccount.changeFeed: 
-  storageAccount.isVersioningEnabled: 
-  storageAccount.isShareSoftDeleteEnabled: 
+  # Storage Account
+  storageAccount.name: "$(deploymentEnvironment-lower)$(projectName-lower)$(nc-function-infrastructure-lower)$(nc-resource-storageaccount-lower)$(postFixStorageAccountNumber)"
+  storageAccount.accountType:
+  storageAccount.kind:
+  storageAccount.accessTier:
+  storageAccount.minimumTlsVersion:
+  storageAccount.supportsHttpsTrafficOnly:
+  storageAccount.allowBlobPublicAccess:
+  storageAccount.allowSharedKeyAccess:
+  storageAccount.networkAclsBypass:
+  storageAccount.networkAclsDefaultAction:
+  storageAccount.isContainerRestoreEnabled:
+  storageAccount.isBlobSoftDeleteEnabled:
+  storageAccount.blobSoftDeleteRetentionDays:
+  storageAccount.isContainerSoftDeleteEnabled:
+  storageAccount.containerSoftDeleteRetentionDays:
+  storageAccount.changeFeed:
+  storageAccount.isVersioningEnabled:
+  storageAccount.isShareSoftDeleteEnabled:
   storageAccount.shareSoftDeleteRetentionDays:
-  storageAccount.isHnsEnabled: 
+  storageAccount.isHnsEnabled:
 
   #API Management
-  apiManagement.serviceName: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-apimanagement)$(postFixAPIManagement)'
-  apiManagement.apipublisherEmail: 
-  apiManagement.apipublisherName: 
-  apiManagement.apisku: 
-  apiManagement.apiskuCount: 
+  apiManagement.serviceName: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-apimanagement)$(postFixAPIManagement)"
+  apiManagement.apipublisherEmail:
+  apiManagement.apipublisherName:
+  apiManagement.apisku:
+  apiManagement.apiskuCount:
 
   #Azure Map
-  azureMap.pricingTier: 
-  azureMap.kind: 
-  azureMap.accountName: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-azuremap)$(postFixAzureMap)'
+  azureMap.pricingTier:
+  azureMap.kind:
+  azureMap.accountName: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-azuremap)$(postFixAzureMap)"
 
-# Redis Cache
-  redisCache.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-rediscache)$(postFixRedisCache)'
+  # Redis Cache
+  redisCache.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-rediscache)$(postFixRedisCache)"
 
-# Signalr
-  signalr.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-signalr)$(postFixSignalr)'
+  # Signalr
+  signalr.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-signalr)$(postFixSignalr)"
 
-# DevTestLab
-  devTestLab.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-devtestlabs)$(postFixDevTestLab)'
-  devTestLab.identityType: 
-  devTestLab.labIsolation: 
-  devTestLab.timeZoneId: 
-  devTestLab.dailyRecurrence: 
+  # DevTestLab
+  devTestLab.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-devtestlabs)$(postFixDevTestLab)"
+  devTestLab.identityType:
+  devTestLab.labIsolation:
+  devTestLab.timeZoneId:
+  devTestLab.dailyRecurrence:
 
-# KeyValult
-  keyVault.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-keyvault)$(postFixKeyVault)'
-  keyVault.objectID_Spn_AdministratorId: 
-  keyVault.objectID_Spn_ContributorId: 
-  keyVault.objectID_Spn_ReaderId: 
-  keyVault.enabledForDeployment: 
-  keyVault.enabledForDiskEncryption: 
-  keyVault.enabledForTemplateDeployment: 
-  keyVault.enableSoftDelete: 
-  keyVault.softDeleteRetentionInDays: 
-  keyVault.enableRbacAuthorization: 
-  keyVault.roleIdMapping_Administrator: 
+  # KeyValult
+  keyVault.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-infrastructure)$(nc-resource-keyvault)$(postFixKeyVault)"
+  keyVault.objectID_Spn_AdministratorId:
+  keyVault.objectID_Spn_ContributorId:
+  keyVault.objectID_Spn_ReaderId:
+  keyVault.enabledForDeployment:
+  keyVault.enabledForDiskEncryption:
+  keyVault.enabledForTemplateDeployment:
+  keyVault.enableSoftDelete:
+  keyVault.softDeleteRetentionInDays:
+  keyVault.enableRbacAuthorization:
+  keyVault.roleIdMapping_Administrator:
   keyVault.roleIdMapping_Contributor:
   keyVault.roleIdMapping_Reader:
-  keyVault.sku: 
+  keyVault.sku:
 
-# Function App
-  functionAppHostingPlan.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-serviceplan)$(postFixFunctionAppServicePlan)'
-  functionAppHostingPlan.kind: 
-  functionAppHostingPlan.perSiteScaling: 
-  functionAppHostingPlan.elasticScaleEnabled: 
-  functionAppHostingPlan.maximumElasticWorkerCount: 
-  functionAppHostingPlan.isSpot: 
-  functionAppHostingPlan.reserved: 
-  functionAppHostingPlan.isXenon: 
-  functionAppHostingPlan.hyperV: 
-  functionAppHostingPlan.targetWorkerCount: 
-  functionAppHostingPlan.targetWorkerSizeId: 
-  functionAppHostingPlan.zoneRedundant: 
-  functionAppHostingPlan.skuName: 
-  functionAppHostingPlan.skuTier: 
-  functionAppHostingPlan.skuSize: 
-  functionAppHostingPlan.skuCapacity: 
+  # Function App
+  functionAppHostingPlan.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-serviceplan)$(postFixFunctionAppServicePlan)"
+  functionAppHostingPlan.kind:
+  functionAppHostingPlan.perSiteScaling:
+  functionAppHostingPlan.elasticScaleEnabled:
+  functionAppHostingPlan.maximumElasticWorkerCount:
+  functionAppHostingPlan.isSpot:
+  functionAppHostingPlan.reserved:
+  functionAppHostingPlan.isXenon:
+  functionAppHostingPlan.hyperV:
+  functionAppHostingPlan.targetWorkerCount:
+  functionAppHostingPlan.targetWorkerSizeId:
+  functionAppHostingPlan.zoneRedundant:
+  functionAppHostingPlan.skuName:
+  functionAppHostingPlan.skuTier:
+  functionAppHostingPlan.skuSize:
+  functionAppHostingPlan.skuCapacity:
   functionAppAppInsight.appInsightsSubscriptionId: $(appInsightsubscriptionId)
   functionAppAppInsight.appInsightsResourceGroupName: $(otherInfraResourceGroupName)
   functionAppAppInsight.appInsightsName: $(appInsightsName)
-  functionApp.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-functionapp)$(postFixFunctionApp)'
-  functionApp.kind: 
-  functionApp.reserved: 
-  functionApp.isXenon: 
-  functionApp.hyperV: 
-  functionApp.vnetRouteAllEnabled: 
-  functionApp.vnetImagePullEnabled: 
-  functionApp.vnetContentShareEnabled: 
-  functionApp.scmSiteAlsoStopped: 
-  functionApp.clientAffinityEnabled: 
-  functionApp.clientCertEnabled: 
-  functionApp.clientCertMode: 
-  functionApp.hostNamesDisabled: 
-  functionApp.httpsOnly: 
-  functionApp.redundancyMode: 
-  functionApp.storageAccountRequired: 
-  functionApp.alwaysOn: 
-  functionApp.numberOfWorkers: 
+  functionApp.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-functionapp)$(postFixFunctionApp)"
+  functionApp.kind:
+  functionApp.reserved:
+  functionApp.isXenon:
+  functionApp.hyperV:
+  functionApp.vnetRouteAllEnabled:
+  functionApp.vnetImagePullEnabled:
+  functionApp.vnetContentShareEnabled:
+  functionApp.scmSiteAlsoStopped:
+  functionApp.clientAffinityEnabled:
+  functionApp.clientCertEnabled:
+  functionApp.clientCertMode:
+  functionApp.hostNamesDisabled:
+  functionApp.httpsOnly:
+  functionApp.redundancyMode:
+  functionApp.storageAccountRequired:
+  functionApp.alwaysOn:
+  functionApp.numberOfWorkers:
   functionApp.linuxFxVersion:
-  functionApp.acrUseManagedIdentityCreds: 
-  functionApp.http20Enabled: 
-  functionApp.functionAppScaleLimit: 
+  functionApp.acrUseManagedIdentityCreds:
+  functionApp.http20Enabled:
+  functionApp.functionAppScaleLimit:
   functionApp.minimumElasticInstanceCount:
 
   # App Service
@@ -176,63 +181,63 @@ variables:
   appServiceAppInsights.appInsightResourceGroupName: $(otherInfraResourceGroupName)
   appServiceAppInsights.appInsightName: $(appInsightsName)
 
-  appServiceHostingPlan.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-serviceplan)$(postFixAppServicePlan)'
-  appServiceHostingPlan.skuName: 
-  appServiceHostingPlan.skuTier: 
-  appServiceHostingPlan.skuSize: 
-  appServiceHostingPlan.skuFamily: 
-  appServiceHostingPlan.skucapacity: 
-  appServiceHostingPlan.kind: 
-  appServiceHostingPlan.zoneRedundant: 
-  appServiceHostingPlan.perSiteScaling: 
-  appServiceHostingPlan.elasticScaleEnabled: 
-  appServiceHostingPlan.maximumElasticWorkerCount: 
-  appServiceHostingPlan.isSpot: 
-  appServiceHostingPlan.reserved: 
-  appServiceHostingPlan.isXenon: 
-  appServiceHostingPlan.hyperV: 
-  appServiceHostingPlan.targetWorkerCount: 
-  appServiceHostingPlan.targetWorkerSizeId: 
-  
-  appservice.Name: '$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-webapp)$(postFixAppService)'
-  appserviceName.alwaysOn: 
-  appserviceName.metadataName: 
-  appserviceName.metadataValue: 
-  appserviceName.phpVersion: 
-  appserviceName.clientAffinityEnabled: 
-  appserviceName.hostNameType: 
-  appserviceName.netFrameworkVersion: 
-  appserviceName.requestTracingEnabled: 
-  appserviceName.remoteDebuggingEnabled: 
-  appserviceName.remoteDebuggingVersion: 
-  appserviceName.httpLoggingEnabled: 
-  appserviceName.logsDirectorySizeLimit: 
-  appserviceName.detailedErrorLoggingEnabled: 
+  appServiceHostingPlan.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-serviceplan)$(postFixAppServicePlan)"
+  appServiceHostingPlan.skuName:
+  appServiceHostingPlan.skuTier:
+  appServiceHostingPlan.skuSize:
+  appServiceHostingPlan.skuFamily:
+  appServiceHostingPlan.skucapacity:
+  appServiceHostingPlan.kind:
+  appServiceHostingPlan.zoneRedundant:
+  appServiceHostingPlan.perSiteScaling:
+  appServiceHostingPlan.elasticScaleEnabled:
+  appServiceHostingPlan.maximumElasticWorkerCount:
+  appServiceHostingPlan.isSpot:
+  appServiceHostingPlan.reserved:
+  appServiceHostingPlan.isXenon:
+  appServiceHostingPlan.hyperV:
+  appServiceHostingPlan.targetWorkerCount:
+  appServiceHostingPlan.targetWorkerSizeId:
+
+  appservice.Name: "$(deploymentEnvironment)$(projectName)$(nc-function-web)$(nc-resource-webapp)$(postFixAppService)"
+  appserviceName.alwaysOn:
+  appserviceName.metadataName:
+  appserviceName.metadataValue:
+  appserviceName.phpVersion:
+  appserviceName.clientAffinityEnabled:
+  appserviceName.hostNameType:
+  appserviceName.netFrameworkVersion:
+  appserviceName.requestTracingEnabled:
+  appserviceName.remoteDebuggingEnabled:
+  appserviceName.remoteDebuggingVersion:
+  appserviceName.httpLoggingEnabled:
+  appserviceName.logsDirectorySizeLimit:
+  appserviceName.detailedErrorLoggingEnabled:
   appserviceName.publishingUsername:
-  appserviceName.scmType: 
-  appserviceName.use32BitWorkerProcess: 
-  appserviceName.webSocketsEnabled: 
-  appserviceName.hostBindingAlwaysOn: 
-  appserviceName.managedPipelineMode: 
-  appserviceName.virtualApplicationsPhysicalPath: 
-  appserviceName.virtualApplicationsPreloadEnabled: 
-  appserviceName.loadBalancing: 
-  appserviceName.autoHealEnabled: 
+  appserviceName.scmType:
+  appserviceName.use32BitWorkerProcess:
+  appserviceName.webSocketsEnabled:
+  appserviceName.hostBindingAlwaysOn:
+  appserviceName.managedPipelineMode:
+  appserviceName.virtualApplicationsPhysicalPath:
+  appserviceName.virtualApplicationsPreloadEnabled:
+  appserviceName.loadBalancing:
+  appserviceName.autoHealEnabled:
   appserviceName.vnetName:
-  appserviceName.vnetRouteAllEnabled: 
-  appserviceName.localMySqlEnabled: 
-  appserviceName.managedServiceIdentityId: 
-  appserviceName.ipSecurityRestrictionsIpAddress: 
-  appserviceName.ipSecurityRestrictionsAction: 
-  appserviceName.ipSecurityRestrictionsPriority: 
-  appserviceName.ipSecurityRestrictionsName: 
-  appserviceName.ipSecurityRestrictionsDescription: 
-  appserviceName.scmIpSecurityRestrictionsipAddress: 
-  appserviceName.scmIpSecurityRestrictionsHostAction: 
-  appserviceName.scmIpSecurityRestrictionsHostpriority: 
-  appserviceName.scmIpSecurityRestrictionsName: 
-  appserviceName.scmIpSecurityRestrictionsDescription: 
-  appserviceName.scmIpSecurityRestrictionsUseMain: 
-  appserviceName.http20Enabled: 
+  appserviceName.vnetRouteAllEnabled:
+  appserviceName.localMySqlEnabled:
+  appserviceName.managedServiceIdentityId:
+  appserviceName.ipSecurityRestrictionsIpAddress:
+  appserviceName.ipSecurityRestrictionsAction:
+  appserviceName.ipSecurityRestrictionsPriority:
+  appserviceName.ipSecurityRestrictionsName:
+  appserviceName.ipSecurityRestrictionsDescription:
+  appserviceName.scmIpSecurityRestrictionsipAddress:
+  appserviceName.scmIpSecurityRestrictionsHostAction:
+  appserviceName.scmIpSecurityRestrictionsHostpriority:
+  appserviceName.scmIpSecurityRestrictionsName:
+  appserviceName.scmIpSecurityRestrictionsDescription:
+  appserviceName.scmIpSecurityRestrictionsUseMain:
+  appserviceName.http20Enabled:
   appserviceName.minTlsVersion:
-  appserviceName.ftpsState: 
+  appserviceName.ftpsState:
