@@ -19,6 +19,7 @@ variables:
   appInsightsubscriptionId:
   servicesLocation:
   deploy:
+  destroy:
   servicesToDeploy:
   postFixResourceGroupNumber:
   postFixEventTopicNumber:
